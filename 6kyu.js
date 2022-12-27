@@ -1,7 +1,8 @@
 // Roman Numerals Decoder
 // https://www.codewars.com/kata/51b6249c4612257ac0000005/train/javascript
 
-// Create a function that takes a Roman numeral as its argument and returns its value as a numeric decimal integer. You don't need to validate the form of the Roman numeral.
+// Create a function that takes a Roman numeral as its argument and returns its value
+// as a numeric decimal integer. You don't need to validate the form of the Roman numeral.
 
 function romanDecoder(roman) {
   let romanObj = {
@@ -28,9 +29,12 @@ function romanDecoder(roman) {
 
 // console.log(romanDecoder("XXI")); // 21
 
+// ------------------------------------------------------------------------------------------------------
+
 // Roman numerals encoder
 // https://www.codewars.com/kata/51b62bf6a9c58071c600001b/train/javascript
-// Create a function taking a positive integer as its parameter and returning a string containing the Roman Numeral representation of that integer.
+// Create a function taking a positive integer as its parameter and returning a string
+// containing the Roman Numeral representation of that integer.
 
 function romanEncoder(number) {
   let romanObj = {
@@ -58,3 +62,5 @@ function romanEncoder(number) {
   }
   return arr.join("");
 }
+
+// -----------------------------------------------------------------------------------------------------

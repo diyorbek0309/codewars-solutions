@@ -22,7 +22,16 @@ function powerSumDigTerm(n) {
 
 // console.log(powerSumDigTerm(1)); // 81
 
+// ---------------------------------------------------------------------------------------------------------------
+
 // The Hashtag Generator
+// Here's the deal:
+// It must start with a hashtag (#).
+// All words must have their first letter capitalized.
+// If the final result is longer than 140 chars it must return false.
+// If the input or the result is an empty string it must return false.
+// https://www.codewars.com/kata/52449b062fb80683ec000024
+
 function generatingHashtag(str) {
   if (str.length === 0) {
     return false;
@@ -39,18 +48,5 @@ function generatingHashtag(str) {
   return "#" + newStr;
 }
 
-function zero() {}
-function one() {}
-function two() {}
-function three() {}
-function four() {}
-function five() {}
-function six() {}
-function seven() {}
-function eight() {}
-function nine() {}
 
-function plus() {}
-function minus() {}
-function times() {}
-function dividedBy() {}
+// ---------------------------------------------------------------------------------------------------------------

@@ -541,3 +541,143 @@ function decomposer(n, remain) {
 }
 
 // -----------------------------------------------------------------------------------------
+
+// Counting Change Combinations
+// https://www.codewars.com/kata/541af676b589989aed0009e7
+
+function countChange(money, coins) {
+  if (money === 0) {
+    return 1;
+  }
+  if (money < 0 || coins.length === 0) {
+    return 0;
+  }
+  return (
+    countChange(money - coins[0], coins) + countChange(money, coins.slice(1))
+  );
+}
+
+// ---------------------------------------------------------------------------------------
+
+// Large Factorials
+// https://www.codewars.com/kata/557f6437bf8dcdd135000010
+
+function factorial(n) {
+  if (!n) return "1";
+  let i, next, carret;
+  const result = n.toString().split``.reverse().map(Number);
+
+  while (--n) {
+    i = carret = 0;
+    while ((next = result[i++]) !== undefined || carret) {
+      carret += n * (next || 0);
+      result[i - 1] = carret % 10;
+      carret = parseInt(carret / 10);
+    }
+  }
+
+  return result.reverse().join``;
+}
+
+// ------------------------------------------------------------------------------------
+
+// Longest Common Subsequence (Performance version)
+// https://www.codewars.com/kata/593ff8b39e1cc4bae9000070
+
+const recursion = (text1, text2, i, j, memo) => {
+  if (memo[i][j] !== null) {
+    return memo[i][j];
+  }
+
+  if (i === 0 || j === 0) {
+    memo[i][j] = "";
+  } else if (text1[i - 1] === text2[j - 1]) {
+    memo[i][j] = text1[i - 1] + recursion(text1, text2, i - 1, j - 1, memo);
+  } else {
+    let [one, two] = [
+      recursion(text1, text2, i, j - 1, memo),
+      recursion(text1, text2, i - 1, j, memo),
+    ];
+    if (one.length > two.length) {
+      memo[i][j] = one;
+    } else {
+      memo[i][j] = two;
+    }
+  }
+
+  return memo[i][j];
+};
+
+function lcs(x, y) {
+  let memo = Array.from({ length: x.length + 1 }, (_, i) =>
+    Array(y.length + 1).fill(null)
+  );
+  const res = recursion(x, y, x.length, y.length, memo);
+  return res.split("").reverse().join("");
+}
+
+// ------------------------------------------------------------------------------------
+
+// https://www.codewars.com/kata/51fda2d95d6efda45e00004e
+
+function User() {
+  this.rank = -8;
+  this.progress = 0;
+  this.HUNDRED = 100;
+  this.HIGHEST = 8;
+}
+
+User.prototype.incProgress = function(rank) {
+  if (rank == 0 || rank > this.HIGHEST || rank < -this.HIGHEST) throw new RangeError("rank input out of range");
+  if (this.rank == this.HIGHEST) return;
+
+  let diff = (rank > 0 && this.rank < 0) || (rank < 0 && this.rank > 0) ? Math.abs(this.rank) + Math.abs(rank) : rank - this.rank;
+  if (rank > 0 && this.rank < 0) diff--;
+  if (rank < 0 && this.rank > 0) diff = -diff;
+  if (diff > 0) {
+    this.progress += (rank == 1 && this.rank == -1) ? 10 : (10 * diff * diff);
+  } else {
+    this.progress += diff == 0 ? 3 : 1;
+  }
+
+  if (this.progress > this.HUNDRED && this.rank < this.HIGHEST) {
+    this.rank += Math.floor(this.progress / this.HUNDRED);
+    if (this.rank == 0) this.rank++;
+    this.progress %= this.HUNDRED;
+  }
+  if (this.rank == this.HIGHEST) this.progress = 0;
+
+  return diff;
+};
+
+// -------------------------------------------------------------------------------
+
+// https://www.codewars.com/kata/5659c6d896bc135c4c00021e
+
+function nextSmaller(n) {
+  let d = n.toString().split(''); 
+  let i1 = 0, tmp, flag = false;  
+  
+  for (var i = 0; i < d.length - 1; i++) {
+    if (d[i]>d[i+1]) {
+      i1 = i;
+      flag = true;
+    }
+  }
+  
+  if (flag == false) return -1;
+  for (var i = d.length - 1; i > 0; i--) {
+    if (i == i1) i--;
+    if (d[i] < d[i1]) {
+      tmp = d[i];
+      d[i] = d[i1];
+      d[i1] = tmp;
+      break;
+    }
+  }
+  if (d[0] == 0) return -1
+  
+  return parseInt(d.slice(0,i1+1).concat(d.slice(i1+1).sort((a,b) => b-a)).join(''))
+}
+
+// ----------------------------------------
